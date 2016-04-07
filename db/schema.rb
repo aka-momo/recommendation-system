@@ -30,10 +30,12 @@ ActiveRecord::Schema.define(version: 20160319215709) do
   add_index "movie_genres", ["movie_id"], name: "index_movie_genres_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "image_url",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",         limit: 255
+    t.string   "image_url",    limit: 255
+    t.string   "imdb_url",     limit: 255
+    t.string   "release_date", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -49,6 +51,9 @@ ActiveRecord::Schema.define(version: 20160319215709) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255
+    t.string   "age",                    limit: 255
+    t.string   "gender",                 limit: 255
+    t.string   "occupation",             limit: 255
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255

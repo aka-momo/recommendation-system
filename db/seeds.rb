@@ -50,59 +50,76 @@
 # rating.save
 
 
-# data_path          = "db/data"
-# genres_path        = data_path + "/genres.dat"
-# movies_path        = data_path + "/movies.dat"
-# ratings_path       = data_path + "/ratings.dat"
-# genre_name_hash = {}
+data_path          = "db/data"
+users_path         = data_path + "/user.dat"
+genres_path        = data_path + "/genres.dat"
+movies_path        = data_path + "/movies.dat"
+ratings_path       = data_path + "/ratings.dat"
+genre_name_hash = {}
 
-# def print_title_message(msg)
-# 	separator = "-"*100
-# 	puts "#{separator}
-# 		[#{msg}]\n#{separator}"
-# end
-
-
-# puts "Importing Genres"
-# g_strings = File.read(genres_path).split("\n")
-
-# ActiveRecord::Base.transaction do
-# 	g_strings.each {|gs| Genre.create(name: gs)}
-# end
-
-# Genre.all.each {|g| genre_name_hash[g.name] = g}
-# print_title_message("#{Genre.count} Genres imported")
+def print_title_message(msg)
+	separator = "-"*100
+	puts "#{separator}
+		[#{msg}]\n#{separator}"
+end
 
 
-# puts "Importing Movies"
-# movies_array = File.read(movies_path).lines.map{|l| l.gsub("\n", "").split("::") }
-# ActiveRecord::Base.transaction do
-# 	movies_array.each do |m|
-# 		movie = Movie.new({id: m[0], name: m[1]}, :without_protection => true)
-# 		movie.save
-# 		movie.genres << m[2].split("|").map {|gn| genre_name_hash[gn]}
-# 	end
-# end
-# movies_array = nil
-# print_title_message("#{Movie.count} Movies imported")
+puts "Importing Genres"
+generes_array = File.read(genres_path).lines.map{|l| l.gsub("\n", "").split("::") }
 
-# puts "Importing Ratings"
-# ratings_array = File.read(ratings_path).lines.map{|l| l.gsub("\n", "").split("::") }
-# ActiveRecord::Base.transaction do
-# 	ratings_array.each do |r|
-# 		rating = Rating.new({user_id: r[0], movie_id: r[1], score: r[2]} , :without_protection => true)
-# 		rating.save
-# 	end
-# end
-# ratings_array = nil
-# print_title_message("#{Rating.count} Ratings imported")
+ActiveRecord::Base.transaction do
+	generes_array.each do |g| 
+		genre = Genre.new({name: g[0]},  :without_protection => true)
+		genre.save
+		genre_name_hash[g[1]] = genre
+	end
+end
+
+
+print_title_message("#{Genre.count} Genres imported")
+
+
+puts "Importing Movies"
+movies_array = File.read(movies_path).lines.map{|l| l.gsub("\n", "").split("::") }
+
+movies_array.each_slice(200) do |batch|
+	ActiveRecord::Base.transaction do
+		batch.each do |m|
+			movie = Movie.new({id: m[0], name: m[1], imdb_url: m[3], release_date: m[2]}, :without_protection => true)
+			movie.save
+			movie.genres << m[4..100].select {|gn| gn.to_i > 0 }.map{|gnn| genre_name_hash[gnn]}
+		end
+		puts "Imported Movies -> #{Movie.count} "
+	end
+end
+movies_array = nil
+print_title_message("#{Movie.count} Movies imported")
+
+puts "Importing Ratings"
+ratings_array = File.read(ratings_path).lines.map{|l| l.gsub("\n", "").split("::") }
+
+ratings_array.each_slice(500) do |batch|
+	ActiveRecord::Base.transaction do
+		batch.each do |r|
+			rating = Rating.new({user_id: r[0], movie_id: r[1], score: r[2]} , :without_protection => true)
+			rating.save
+		end
+		puts "Imported Ratings -> #{Rating.count} "
+	end
+end
+ratings_array = nil
+print_title_message("#{Rating.count} Ratings imported")
 
 
 puts "Importing Users"
-ActiveRecord::Base.transaction do
-	users_hash = Rating.pluck(:id).uniq.each do |id|
-		u = User.new({id: id, password: "123456", email: "#{id}@rs.com", name: id.to_s}, :without_protection => true)
-		u.save
+users_array = File.read(users_path).lines.map{|l| l.gsub("\n", "").split("::") }
+users_array.each_slice(200) do |batch|
+	ActiveRecord::Base.transaction do
+		batch.each do |u|
+			u = User.new({id: u[0], password: "123456", email: "#{u[0].to_s}@rs.com", name: u[0].to_s, age: u[1], gender: u[2], occupation: u[3]}, :without_protection => true)
+			u.save
+		end
+		puts "Imported Users -> #{User.count} "
 	end
 end
 print_title_message("#{User.count} Users imported")
