@@ -2,7 +2,7 @@
   %head
     %title Rec Sys
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track', 'landing' => true
     = csrf_meta_tags
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale = 1.0, user-scalable = no", :name => "viewport"}/
@@ -19,15 +19,16 @@
             %span.icon-bar
           / Logo text or image
           %a.navbar-brand{:href => root_path}
-            / %img{:src => image_path("black.png"), :style => "height:40px;width:80px"}/
         .navigation.navbar-collapse.navbar-ex1-collapse.collapse{:style => "height: 1px;"}
           %ul.nav.navbar-nav
             %li
-              %a{:href => "#intro"} Home
+              %a{:href => "/movies"} Home
             %li
               %a{:href => "#about"} About
             %li
-              %a{:href => "#services"} Service
+              %a{:href => "/profiles"} Profile
+            %li
+              %a{:href => "/sign_out", :class => "Hidden", :id => "signoutLink"} Sign Out
     .container{style:"margin-top:70px"}
       = yield
     %footer

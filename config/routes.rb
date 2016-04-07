@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :profiles, only: [:index, :show, :edit]
   devise_for :users, path: '', controllers: { sessions: "users/sessions", registerations: "users/registerations" }
 
   root 'movies#index'

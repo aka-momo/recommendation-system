@@ -1,26 +1,95 @@
-<h2>Log in</h2>
+<link rel="stylesheet" type="text/css" href="/assets/landing.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/landing.js"></script>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<style>
+body {
+    padding-top: 90px;
+  background: url(http://minionsonlinemovie.com/img/minions-movie-bg3.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+</style>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+<div class="container">
+      <div class="row">
+         <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+               <div class="panel-heading">
+                  <div class="row">
+                     <div class="col-xs-6">
+                        <a href="#" class="active" id="login-form-link">Login</a>
+                     </div>
+                     <div class="col-xs-6">
+                        <a href="#" id="register-form-link">Sign Up</a>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-lg-12">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                           <div class="form-group">
+            <%= f.email_field :email, autofocus: true, class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+            <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
+                           </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
+         <% if devise_mapping.rememberable? -%>
+                       <div class="form-group text-center">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+                       </div>
+         <% end -%>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-sm-6 col-sm-offset-3">
+            <%= f.submit "Log in", class:"form-control btn btn-login" %>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                    <div class="text-center">
+                                       <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+      <% end %>
+                        <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                           <div class="form-group">
+                              <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                           </div>
+                           <div class="form-group">
+                              <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                           </div>
+                           <div class="form-group">
+                              <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                           </div>
+                           <div class="form-group">
+                              <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                           </div>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-sm-6 col-sm-offset-3">
+                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 <%= render "users/shared/links" %>
