@@ -13,15 +13,15 @@ class User < ActiveRecord::Base
 
 	def recommended_movies
 		# returns user based recommendation
-		Movies.all
+		UserBased.recommend_for(self)
 	end
 
 	def rate!(movie, score)
 		# Order to rate
+		self.ratings << Rating.new(movie_id: movie.id, score: score)
 	end
 
 	def rated?(movie) 
-		# did i rate?
-		false
+		Rating.exists?(movie_id: movie.id)
 	end
 end

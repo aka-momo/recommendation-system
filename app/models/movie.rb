@@ -7,8 +7,8 @@ class Movie < ActiveRecord::Base
 	has_many :users, through: :ratings, source: :user
 
 	## Functions
-	def recommended_movies
+	def recommended_movies(user)
 		# returns item based recommendation
-		Movies.all
+		ItemBased.recommend_for(user, self)
 	end
 end

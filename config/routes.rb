@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :profiles, only: [:index, :show, :edit]
   devise_for :users, path: '', controllers: { sessions: "users/sessions", registerations: "users/registerations" }

@@ -26,6 +26,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml-rails', '~> 0.9.0'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 
+gem "linalg", :github => "parallel588/linalg"
+gem 'redis', '~> 3.2', '>= 3.2.2'
+gem 'sidekiq', '~> 4.1', '>= 4.1.1'
+gem 'sidetiq', '~> 0.7.0'
+gem 'sinatra', :require => nil
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

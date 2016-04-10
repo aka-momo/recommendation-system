@@ -71,10 +71,11 @@ ActiveRecord::Base.transaction do
 	generes_array.each do |g| 
 		genre = Genre.new({name: g[0]},  :without_protection => true)
 		genre.save
-		genre_name_hash[g[1]] = genre
+		genre_name_hash[g[1].to_i] = genre
 	end
 end
 
+puts genre_name_hash
 
 print_title_message("#{Genre.count} Genres imported")
 
@@ -87,7 +88,11 @@ movies_array.each_slice(200) do |batch|
 		batch.each do |m|
 			movie = Movie.new({id: m[0], name: m[1], imdb_url: m[3], release_date: m[2]}, :without_protection => true)
 			movie.save
-			movie.genres << m[4..100].select {|gn| gn.to_i > 0 }.map{|gnn| genre_name_hash[gnn]}
+			m[4..100].each_with_index do |v ,index|
+				if v.to_i > 0
+					movie.genres << genre_name_hash[index]
+				end
+			end
 		end
 		puts "Imported Movies -> #{Movie.count} "
 	end
