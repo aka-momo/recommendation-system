@@ -6,6 +6,9 @@ $(function() {
         $('#register-form-link').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
+
+        $('form[name="login"]').removeClass("Hidden");
+        $('form[name="signup"]').addClass("Hidden");
     });
     $('#register-form-link').click(function(e) {
         $("#register-form").delay(100).fadeIn(100);
@@ -13,6 +16,9 @@ $(function() {
         $('#login-form-link').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
+
+        $('form[name="login"]').addClass("Hidden");
+        $('form[name="signup"]').removeClass("Hidden");
     });
 
         var path = window.location.pathname;
@@ -20,9 +26,12 @@ $(function() {
         path.indexOf('sign_in') > -1)
     {
         $('#signoutLink').addClass('Hidden');
+        $('#login-form-link').trigger('click');
     }
     else{
         $('#signoutLink').removeClass('Hidden');
+        $('#register-form-link').trigger('click');
     }
+
 });
 

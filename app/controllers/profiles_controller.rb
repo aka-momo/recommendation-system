@@ -11,6 +11,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = user.find(param[:id])
+    @recommended_movies = @user.recommended_movies;
   end
 
   # GET /profiles/new
