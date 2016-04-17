@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
   resources :profiles, only: [:index, :show, :edit]
-  devise_for :users, path: '', controllers: { sessions: "users/sessions", registerations: "users/registerations" }
+  devise_for :users, path: '', controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   root 'movies#index'
 
-  resources :movies, only: [:index, :show]
+  resources :movies, only: [:index, :show] do 
+    member do 
+      post :rate
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

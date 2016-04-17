@@ -17,6 +17,7 @@
 Imports
 ================================= */
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,300,700,800);
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 /* ================================
 Defaults
@@ -196,3 +197,24 @@ nav.navbar.fixed-to-top{
 	font-weight: 700;
 	font-size: 2em;
 }
+
+
+/* Movies */
+body{ margin-top:20px;} 
+.glyphicon { margin-right:5px;}
+.section-box h2 { margin-top:0px;}
+.section-box h2 a { font-size:15px; }
+.glyphicon-heart { color:#e74c3c;}
+.glyphicon-comment { color:#27ae60;}
+.separator { padding-right:5px;padding-left:5px; }
+.section-box hr {margin-top: 0;margin-bottom: 5px;border: 0;border-top: 1px solid rgb(199, 199, 199);}
+
+
+/* ========================================================================== Author's custom styles ========================================================================== */ 
+body { font-family: 'Open Sans', sans-serif; } 
+.fb-profile 
+img.fb-image-lg{ z-index: 0; width: 100%; margin-bottom: 10px; } 
+.fb-image-profile { margin: -90px 10px 0px 50px; z-index: 9; width: 20%; } 
+@media (max-width:768px) { .fb-profile-text>h1{ font-weight: 700; font-size:16px; } 
+.fb-image-profile { margin: -45px 10px 0px 25px; z-index: 9; width: 20%; } }
+

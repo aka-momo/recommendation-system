@@ -1,0 +1,22 @@
+.col-md-6
+  .well.well-sm
+    .row
+      .col-xs-3.col-md-3.text-center
+        %img.img-rounded.img-responsive{:alt => movie.name, :src => image_path(movie.photo_url)}
+      .col-xs-9.col-md-9.section-box
+        %h2
+          = link_to movie.name, movie
+          %a{:href => movie.imdb_url, :target => "_blank"}
+            %span.glyphicon.glyphicon-new-window
+        %p.small
+          = movie.release_date
+        %p
+          = render :partial => 'shared/stars', :locals => {:number_of_stars => movie.overall_ratings}
+          = "(#{movie.number_of_ratings})"
+        %hr/
+        .row.rating-desc
+          .col-md-12
+            = render :partial => 'shared/genres', :locals => {:movie => movie}
+            / %span.separator |
+            / = succeed "(100" do
+            /   %span.glyphicon.glyphicon-comment

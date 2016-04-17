@@ -18,10 +18,27 @@ class User < ActiveRecord::Base
 
 	def rate!(movie, score)
 		# Order to rate
-		self.ratings << Rating.new(movie_id: movie.id, score: score)
+		if rating = rating_for_movie(movie)
+			rating.update(score: score)
+		else
+			self.ratings << Rating.new(movie_id: movie.id, score: score)
+		end
+		
 	end
 
 	def rated?(movie) 
 		Rating.exists?(movie_id: movie.id)
+	end
+
+	def rating_for_movie(movie)
+		ratings.find_by(movie_id: movie.id)
+	end
+
+	def rating_for_movie_or_zero(movie)
+		if rating = rating_for_movie(movie)
+			rating.score
+		else
+			0
+		end
 	end
 end

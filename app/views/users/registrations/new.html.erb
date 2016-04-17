@@ -1,29 +1,93 @@
-<h2>Sign up</h2>
+<link rel="stylesheet" type="text/css" href="/assets/landing.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/landing.js"></script>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<style>
+body {
+    padding-top: 90px;
+  background: url(http://minionsonlinemovie.com/img/minions-movie-bg3.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+</style>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class="container">
+      <div class="row">
+         <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+               <div class="panel-heading">
+                  <div class="row">
+                     <div class="col-xs-6">
+                        <a href="login-form-link" class="active" id="login-form-link">Login</a>
+                     </div>
+                     <div class="col-xs-6">
+                        <a href="register-form-link" id="register-form-link">Sign Up</a>
+                     </div>
+                  </div>
+                  <hr>
+               </div>
+               <div class="panel-body">
+                  <div class="row">
+                     <div class="col-lg-12">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post, name: 'login' }) do |f| %>
+                           <div class="form-group">
+            <%= f.email_field :email,placeholder: "Email Address", autofocus: true, class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+            <%= f.password_field :password, placeholder: "Password", autocomplete: "off", class:"form-control" %>
+                           </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
+         <% if devise_mapping.rememberable? -%>
+                       <div class="form-group text-center">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+                       </div>
+         <% end -%>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-sm-6 col-sm-offset-3">
+            <%= f.submit "Log in", class:"form-control btn btn-login" %>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                 </div>
+                              </div>
+                           </div>
+      <% end %>
+                        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, name: 'signup' }) do |f| %>
+                               <%= devise_error_messages! %>
+                           <div class="form-group">
+                              <%= f.text_field :name,placeholder: "Name", autofocus: true, class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+                              <%= f.email_field :email, placeholder: "Email Address", autofocus: true, class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+                              <%= f.password_field :password, placeholder: "Password", autocomplete: "off", class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+                              <%= f.password_field :password_confirmation,placeholder: "Password Confirmation",  autocomplete: "off", class:"form-control" %>
+                           </div>
+                           <div class="form-group">
+                              <div class="row">
+                                 <div class="col-sm-6 col-sm-offset-3">
+                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Sign Up">
+                                 </div>
+                              </div>
+                           </div>
+                        <% end %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 <%= render "users/shared/links" %>

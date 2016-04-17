@@ -78,14 +78,15 @@
      <div class="panel panel-default">
   <div class="panel-heading">Movies Recommended Just For You!</div>
   <div class="panel-body">
+     <% @recommended_movies.each do |movie| %>
       <div class="media">
         <a class="pull-left" href="#">
             <img class="media-object" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSPISbJaP5Ic6sbJhxSsQInhXPqyK25pBz2ft7SINTMiPUPNpt1">
         </a>
         <div class="media-body">
-            <h4 class="media-heading">Horrible Bosses(2011)</h4>
-          <p>Director: Tim Miller , Stars:Jennefer Aniston , Ryan Renolds</p>
-          <p> Action|Adventure|Comedy </p>
+            <h4 class="media-heading"> <%= movie.name %></h4>
+          <p><%= movie.release_date %> </p>
+          <p> <%= movie.Genre %> </p>
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> 2hrs:44mins </span></li>
             <li>|</li>

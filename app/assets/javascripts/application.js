@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require landing
+//= require profiles
+//= require movies

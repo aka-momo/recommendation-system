@@ -1,0 +1,41 @@
+.container
+  .col-lg-12.col-sm-12
+    .card.hovercard
+      .card-background
+        %img.card-bkimg{:alt => "", :src => "http://lorempixel.com/100/100/people/9/"}/
+        / http://lorempixel.com/850/280/people/9/
+      .useravatar
+        %img{:alt => "", :src => "http://nobleok.org/wp-content/uploads/2014/07/default-profile-female.jpg"}/
+      .card-info
+        %span.card-title= current_user.name
+    / .btn-pref.btn-group.btn-group-justified.btn-group-lg{"aria-label" => "...", :role => "group"}
+    /   .btn-group{:role => "group"}
+    /     %button#stars.btn.btn-primary{"data-toggle" => "tab", :href => "#tab1", :type => "button"}
+    /       %span.glyphicon.glyphicon-star{"aria-hidden" => "true"}
+    /       .hidden-xs Ratings
+    /   .btn-group{:role => "group"}
+    /     %button#favorites.btn.btn-default{"data-toggle" => "tab", :href => "#tab2", :type => "button"}
+    /       %span.glyphicon.glyphicon-heart{"aria-hidden" => "true"}
+    /       .hidden-xs Likes
+    /   .btn-group{:role => "group"}
+    /     %button#following.btn.btn-default{"data-toggle" => "tab", :href => "#tab3", :type => "button"}
+    /       %span.glyphicon.glyphicon-user{"aria-hidden" => "true"}
+    /       .hidden-xs Following
+
+    %br 
+    
+    .panel.panel-default
+      .panel-heading Movies Recommended Just For You!
+      .panel-body
+        .row
+          - @recommended_movies.each do |movie|
+            = render :partial => 'shared/movie', :locals => {:movie => movie}
+
+    .panel.panel-default
+      .panel-heading Rated Movies
+      .panel-body
+        .row
+          - @rated_movies.each do |movie|
+            = render :partial => 'shared/movie', :locals => {:movie => movie}
+        %center
+          = paginate @rated_movies, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"

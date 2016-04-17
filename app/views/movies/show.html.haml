@@ -1,0 +1,23 @@
+.container
+	.col-lg-12.col-sm-12
+		.card.hovercard
+			.card-background
+				%img.card-bkimg{:alt => "", :src => "http://lorempixel.com/100/100/people/9/"}/
+			.useravatar
+				%img{:alt => "", :src => image_path(@movie.photo_url) }/
+			.card-info
+				%span.card-title
+					= succeed @movie.name do
+						#stars-existing.starrr{"data-rating" => current_user.rating_for_movie_or_zero(@movie) }
+				%br
+				%span
+					= render :partial => 'shared/genres', :locals => {:movie => @movie}
+
+		%br 
+		
+		.panel.panel-default
+			.panel-heading Similar Movies
+			.panel-body
+				.row
+					- @recommended_movies.each do |movie|
+						= render :partial => 'shared/movie', :locals => {:movie => movie}

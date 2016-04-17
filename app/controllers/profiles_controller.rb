@@ -6,11 +6,15 @@ class ProfilesController < ApplicationController
   def index
     @profiles = Profile.all
     @username = current_user.name
+    @recommended_movies = current_user.recommended_movies.limit(10).to_a
+    @rated_movies = current_user.movies.page(params[:page]).per(10)
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = user.find(param[:id])
+    @recommended_movies = @user.recommended_movies
   end
 
   # GET /profiles/new

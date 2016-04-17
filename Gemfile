@@ -31,6 +31,9 @@ gem 'redis', '~> 3.2', '>= 3.2.2'
 gem 'sidekiq', '~> 4.1', '>= 4.1.1'
 gem 'sidetiq', '~> 0.7.0'
 gem 'sinatra', :require => nil
+
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
