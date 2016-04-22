@@ -13,6 +13,8 @@
 #
 # ENV['RAILS_RELATIVE_URL_ROOT'] = "/gitlab"
 
+root_path = "/root/recommendation-system"
+
 # Read about unicorn workers here:
 # http://doc.gitlab.com/ee/install/requirements.html#unicorn-workers
 #
@@ -27,12 +29,12 @@ worker_processes 3
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-working_directory "#{Rails.root}" # available in 0.94.0+
+working_directory "#{root_path}" # available in 0.94.0+
 
 # Listen on both a Unix domain socket and a TCP port.
 # If you are load-balancing multiple Unicorn masters, lower the backlog
 # setting to e.g. 64 for faster failover.
-listen "#{Rails.root}/tmp/sockets/unicorb.socket", :backlog => 1024
+listen "#{root_path}/tmp/sockets/unicorb.socket", :backlog => 1024
 
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
@@ -53,13 +55,13 @@ listen "#{Rails.root}/tmp/sockets/unicorb.socket", :backlog => 1024
 timeout 60
 
 # feel free to point this anywhere accessible on the filesystem
-pid "#{Rails.root}/tmp/pids/unicorn.pid"
+pid "#{root_path}/tmp/pids/unicorn.pid"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, some applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "#{Rails.root}/log/unicorn.stderr.log"
-stdout_path "#{Rails.root}/log/unicorn.stdout.log"
+stderr_path "#{root_path}/log/unicorn.stderr.log"
+stdout_path "#{root_path}/log/unicorn.stdout.log"
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 preload_app true
