@@ -1,6 +1,4 @@
 .container
-
-
   .panel.panel-default
     .panel-heading Movies
     .panel-body
@@ -9,42 +7,3 @@
           = render :partial => 'shared/movie', :locals => {:movie => movie}
       %center
         = paginate @movies, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"
-  / .panel.panel-default
-  /   .panel-heading Hot Movies
-  /   .panel-body
-  /     %div{:style => "width: 100%"}
-  /       %center
-  /         .row{:style => "text-align: center"}
-  /           .col-sm-2{:style => "width: 300px"}
-  /             .thumbnail
-  /               %img{:alt => "...", :src => "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSPISbJaP5Ic6sbJhxSsQInhXPqyK25pBz2ft7SINTMiPUPNpt1", :style => "width:200px; height: 200px"}/
-  /               .caption
-  /                 %h3 Horrible Bosses
-  /                 %div
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star-empty
-  /           .col-sm-2{:style => "width: 300px"}
-  /             .thumbnail
-  /               %img{:src => "http://thetalkhouse.com/film/wp-content/files_mf/cache/th_ac20526bd9c59f95f4e14e6ffcd14218_The_Intern.jpg", :style => "width:200px; height: 200px"}/
-  /               .caption
-  /                 %h3 The Intern
-  /                 %div
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star-empty
-  /           .col-sm-2{:style => "width: 300px"}
-  /             .thumbnail
-  /               %img{:src => "http://cdn.hitfix.com/photos/5669219/Poster-Art-for-the-Amazing-Spiderman-2_event_main.jpg", :style => "width:200px; height: 200px"}/
-  /               .caption
-  /                 %h3 Spiderman
-  /                 %div
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star
-  /                   %span.glyphicon.glyphicon-star-empty
