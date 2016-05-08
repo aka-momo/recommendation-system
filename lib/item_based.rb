@@ -21,7 +21,7 @@ class ItemBased < RecommenderBase
     user_ids    = User.order('id asc').pluck(:id)
     ratings     = movie.ratings.to_a.group_by(&:user_id)
     ratings_row = []
-    user_ids.each do |user_id|
+    user_ids.first(self.user_count).each do |user_id|
       ratings_row << (ratings[user_id].nil? ? 0 : ratings[user_id].first.score)
     end
     Linalg::DMatrix[ratings_row]

@@ -5,6 +5,7 @@ redis_conf = {
 }
 
 $redis = Redis.new(:host => redis_conf[:host], :port => redis_conf[:port], :db => 15)
+$redis.flushall
 
 Sidekiq.configure_server do |config|
   config.redis = { url: "redis://#{redis_conf[:host]}:#{redis_conf[:port]}"}
@@ -32,4 +33,7 @@ Sidetiq.configure do |config|
   config.worker_history = 50
 end
 
-RecWorker.perform_async
+
+Sidekiq::Queue.new.clear
+Sidekiq::RetrySet.new.clear
+Sidekiq::ScheduledSet.new.clear

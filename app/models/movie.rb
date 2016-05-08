@@ -9,7 +9,7 @@ class Movie < ActiveRecord::Base
 	## Functions
 	def recommended_movies(user)
 		# returns item based recommendation
-		ItemBased.recommend_for(user, self)
+		ItemBased.recommend_for(user, self) rescue Movie.random_rec
 	end
 
 	def overall_ratings
@@ -36,6 +36,10 @@ class Movie < ActiveRecord::Base
 
 	def download_movie_details
 		# scrap imdb
+	end
+
+	def self.random_rec
+		[]
 	end
 
 end

@@ -16,6 +16,14 @@ class RecommenderBase
     Linalg::DMatrix.rows(JSON.parse($redis.get("s")))
   end
 
+  def self.user_count
+    $redis.get("user_count").to_i
+  end
+
+  def self.set_user_count(c)
+    $redis.set("user_count", c)
+  end
+
   def self.set_u(u)
     $redis.set("u", u.to_a)
   end
@@ -44,6 +52,7 @@ class RecommenderBase
     movie_ids = Movie.order('id asc').pluck(:id)
     ratings   = Rating.all.to_a.group_by(&:movie_id)
     rating_rows = []
+    set_user_count user_ids.count
     movie_ids.each do |movie_id|
       tmp = []
       rating = ratings[movie_id]

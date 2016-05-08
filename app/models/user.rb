@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
 	def recommended_movies
 		# returns user based recommendation
-		UserBased.recommend_for(self)
+		UserBased.recommend_for(self) rescue Movie.random_rec
 	end
 
 	def rate!(movie, score)
